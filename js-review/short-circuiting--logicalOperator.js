@@ -17,3 +17,13 @@ console.log(true || "Some String"); //true
 console.log(false || "Some String"); //Some String
 
 console.log(book.translations.spanish || "NOT TRANSLATED");
+
+// Some times thing goes worng
+console.log(book.reviews.librarything.reviewsCount); //if it is there but value is 0 (falsy)
+const countWrong = book.reviews.librarything.reviewsCount || "no data";
+console.log(countWrong); //no data (but there was)
+
+// Nullish collision Operator
+const count = book.reviews.librarything.reviewsCount ?? "no data";
+console.log(count); // now answer will be 0
+//Nullish collision short circuit when value is null or undefined not on (0,'')
