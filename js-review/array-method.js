@@ -27,9 +27,9 @@ pagesAllBooks;
 // Sort Method
 
 const arr = [3, 7, 1, 9, 6];
-const sorted = arr.sort((a, b) => a - b);
+const sorted = arr.slice().sort((a, b) => a - b);
 sorted;
 arr;
 
-const sortedByPages = books.sort((a, b) => a.pages - b.pages);
+const sortedByPages = books.slice().sort((a, b) => a.pages - b.pages);
 sortedByPages;
