@@ -76,13 +76,7 @@ function Menu() {
       {numPizzas > 0 ? (
         <ul className='pizzas'>
           {pizzas.map((pizza) => (
-            <Pizza
-              name={pizza.name}
-              ingredients={pizza.ingredients}
-              photoName={pizza.photoName}
-              price={pizza.price}
-              key={pizza.name}
-            />
+            <Pizza pizza={pizza} key={pizza.name} />
           ))}
         </ul>
       ) : (
@@ -93,13 +87,14 @@ function Menu() {
 }
 
 function Pizza(props) {
+  const { photoName, name, ingredients, price } = props.pizza;
   return (
     <li className='pizza'>
-      <img src={props.photoName} alt={props.name} />
+      <img src={photoName} alt={name} />
       <div>
-        <h3>{props.name}</h3>
-        <p>{props.ingredients}</p>
-        <span>{props.price}</span>
+        <h3>{name}</h3>
+        <p>{ingredients}</p>
+        <span>{price}</span>
       </div>
     </li>
   );
