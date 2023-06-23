@@ -73,12 +73,19 @@ function Menu() {
     // we added conditon because if we dont we will get 0 and it will shortcircuit and show
     <main className='menu'>
       <h2>Our Menu</h2>
+
       {numPizzas > 0 ? (
-        <ul className='pizzas'>
-          {pizzas.map((pizza) => (
-            <Pizza pizza={pizza} key={pizza.name} />
-          ))}
-        </ul>
+        <>
+          <p>
+            Authentic Italian cuisine. 6 creative dishes to choose from. All
+            from our stone oven, all organic all delicious
+          </p>
+          <ul className='pizzas'>
+            {pizzas.map((pizza) => (
+              <Pizza pizza={pizza} key={pizza.name} />
+            ))}
+          </ul>
+        </>
       ) : (
         <p>We're still working on our mene. Please come back later</p>
       )}
@@ -87,14 +94,14 @@ function Menu() {
 }
 
 function Pizza(props) {
-  const { photoName, name, ingredients, price } = props.pizza;
+  const { photoName, name, ingredients, price, soldOut } = props.pizza;
   return (
-    <li className='pizza'>
+    <li className={`pizza ${soldOut && "sold-out"}`}>
       <img src={photoName} alt={name} />
       <div>
         <h3>{name}</h3>
         <p>{ingredients}</p>
-        <span>{price}</span>
+        <span>{soldOut ? "SOLD OUT" : price}</span>
       </div>
     </li>
   );
