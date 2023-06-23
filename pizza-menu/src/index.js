@@ -67,20 +67,25 @@ function Header() {
 }
 
 function Menu() {
+  const pizzas = pizzaData;
+  const numPizzas = pizzas.length;
   return (
+    // we added conditon because if we dont we will get 0 and it will shortcircuit and show it
     <main className='menu'>
       <h2>Our Menu</h2>
-      <ul className='pizzas'>
-        {pizzaData.map((pizza) => (
-          <Pizza
-            name={pizza.name}
-            ingredients={pizza.ingredients}
-            photoName={pizza.photoName}
-            price={pizza.price}
-            key={pizza.name}
-          />
-        ))}
-      </ul>
+      {numPizzas > 0 && (
+        <ul className='pizzas'>
+          {pizzas.map((pizza) => (
+            <Pizza
+              name={pizza.name}
+              ingredients={pizza.ingredients}
+              photoName={pizza.photoName}
+              price={pizza.price}
+              key={pizza.name}
+            />
+          ))}
+        </ul>
+      )}
     </main>
   );
 }
@@ -107,7 +112,12 @@ function Footer() {
 
   return (
     <footer className='footer'>
-      {new Date().toLocaleTimeString()} We're currently open!
+      {isOpen && (
+        <div className='order'>
+          <p>We're open until {closeHour}:00. Come visit us or order online.</p>
+          <button className='btn'>Order</button>
+        </div>
+      )}
     </footer>
   );
 }
