@@ -39,7 +39,7 @@ function App() {
     setFriendsReview(review);
   };
 
-  const averageReview = (myReview + firendReview) / 2;
+  const tip = bill * ((myReview + firendReview) / 2 / 100);
 
   return (
     <div className="App">
