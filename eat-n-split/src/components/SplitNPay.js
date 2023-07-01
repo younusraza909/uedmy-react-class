@@ -4,19 +4,29 @@ import FriendList from "./FriendList";
 
 function SplitNPay() {
   const [friendList, setFriendList] = useState([]);
-  const [selectedfriend, setSelectedFriend] = useState();
+  const [selectedfriend, setSelectedFriend] = useState(null);
 
   function onSelect(id) {
     let selected = friendList.filter((f) => f.id === id);
-    setSelectedFriend(selected);
+    setSelectedFriend(...selected);
   }
 
   function handleAddFriend(name, profile) {
     if (!name || !profile) return;
 
-    let newFriend = { id: Date.now(), name, profileImage: profile };
+    let newFriend = { id: Date.now(), name, profileImage: profile, total: 0 };
 
     setFriendList((list) => [...list, newFriend]);
+  }
+
+  function adjustBill(value, id) {
+    setFriendList((f) =>
+      f.map((f) =>
+        f.id === id
+          ? { ...f, total: Number(f.total) + Number(value) }
+          : { ...f }
+      )
+    );
   }
 
   return (
@@ -26,7 +36,13 @@ function SplitNPay() {
         addFriend={handleAddFriend}
         onSelect={onSelect}
       />
-      <ExpenseCalculator selected={selectedfriend} />
+
+      {selectedfriend && (
+        <ExpenseCalculator
+          selected={selectedfriend}
+          onFormSubmit={adjustBill}
+        />
+      )}
     </div>
   );
 }
