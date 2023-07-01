@@ -12,13 +12,7 @@ function FriendList({ friendList, addFriend, onSelect }) {
     <div>
       <div className="friendContainer">
         {friendList.map((friend) => (
-          <FriendListItem
-            key={friend.id}
-            id={friend.id}
-            name={friend.name}
-            profile={friend.profileImage}
-            onSelect={onSelect}
-          />
+          <FriendListItem key={friend.id} {...friend} onSelect={onSelect} />
         ))}
       </div>
       <div className="buttonContainer">

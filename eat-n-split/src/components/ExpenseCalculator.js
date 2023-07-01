@@ -15,6 +15,10 @@ function ExpenseCalculator({ selected, onFormSubmit }) {
     const remaining = whoPaying === "you" ? friendExpense : -yourExpense;
 
     onFormSubmit(remaining, id);
+
+    setBill(0);
+    setYourExpense(0);
+    setWhoPaying("you");
   }
 
   return (
@@ -53,7 +57,9 @@ function ExpenseCalculator({ selected, onFormSubmit }) {
       </div>
 
       <div className="buttonContainer">
-        <button className="btn">Split Bill</button>
+        <button className="btn" disabled={bill <= 0}>
+          Split Bill
+        </button>
       </div>
     </form>
   );

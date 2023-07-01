@@ -1,12 +1,26 @@
 import React from "react";
 
-function FriendListItem({ profile, name, onSelect, id }) {
+function FriendListItem({ profileImage, name, onSelect, id, total }) {
+  const text =
+    total === 0
+      ? `You are all settled with ${name}`
+      : total > 0
+      ? `${name} owes you ${Math.abs(total)}$`
+      : `You owe ${name} ${Math.abs(total)}$`;
+
   return (
     <div className="friendItem">
-      <img src={profile} className="profile" />
+      <img src={profileImage} className="profile" />
       <div style={{ minWidth: "150px" }}>
         <p className="name">{name}</p>
-        <p className="summary">You owe Clark 7$</p>
+        <p
+          className="summary"
+          style={
+            total > 0 ? { color: "green" } : total < 0 ? { color: "red" } : {}
+          }
+        >
+          {text}
+        </p>
       </div>
       <button className="btn" onClick={() => onSelect(id)}>
         Select
