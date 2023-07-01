@@ -1,6 +1,7 @@
 import React from "react";
 
-function ExpenseCalculator() {
+function ExpenseCalculator({ selected }) {
+  console.log("selected", selected);
   return (
     <form className="calulatorContainer">
       <h1>Split A Bill with Anthony</h1>

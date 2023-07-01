@@ -1,44 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 import FriendListItem from "./FriendListItem";
 import AddFriend from "./AddFriend";
 
-const friendList = [
-  {
-    name: "Clark",
-    profileImage: "https://i.pravatar.cc/48",
-    id: 1,
-  },
-  {
-    name: "Sarah",
-    profileImage: "https://i.pravatar.cc/49",
-    id: 2,
-  },
-  {
-    name: "Anthony",
-    profileImage: "https://i.pravatar.cc/49",
-    id: 3,
-  },
-];
+function FriendList({ friendList, addFriend, onSelect }) {
+  const [isOpen, setIsOpen] = useState(false);
 
-function FriendList() {
+  function handleToggle() {
+    setIsOpen((op) => !op);
+  }
   return (
     <div>
       <div className="friendContainer">
         {friendList.map((friend) => (
           <FriendListItem
             key={friend.id}
+            id={friend.id}
             name={friend.name}
             profile={friend.profileImage}
+            onSelect={onSelect}
           />
         ))}
       </div>
       <div className="buttonContainer">
-        <button className="btn">Add Friend</button>
+        <button className="btn" onClick={handleToggle}>
+          Add Friend
+        </button>
       </div>
-      <AddFriend />
-      <div className="buttonContainer">
-        <button className="btn">Close</button>
-      </div>
+      {isOpen && (
+        <>
+          <AddFriend addFriend={addFriend} />
+          <div className="buttonContainer">
+            <button className="btn" onClick={handleToggle}>
+              Close
+            </button>
+          </div>
+        </>
+      )}
     </div>
   );
 }
