@@ -63,10 +63,10 @@ function Search() {
   );
 }
 
-function Results() {
+function Results({ movies }) {
   return (
     <p className='num-results'>
-      Found <strong>X</strong> results
+      Found <strong>{movies.length}</strong> results
     </p>
   );
 }
@@ -80,14 +80,8 @@ function Logo() {
   );
 }
 
-function Navbar() {
-  return (
-    <nav className='nav-bar'>
-      <Logo />
-      <Search />
-      <Results />
-    </nav>
-  );
+function Navbar({ children }) {
+  return <nav className='nav-bar'>{children}</nav>;
 }
 
 function MovieItem({ movie }) {
@@ -105,8 +99,7 @@ function MovieItem({ movie }) {
   );
 }
 
-function MovieLists() {
-  const [movies, setMovies] = useState(tempMovieData);
+function MovieLists({ movies }) {
   return (
     <ul className='list'>
       {movies?.map((movie) => (
@@ -116,7 +109,7 @@ function MovieLists() {
   );
 }
 
-function ListBox() {
+function ListBox({ children }) {
   const [isOpen1, setIsOpen1] = useState(true);
   return (
     <div className='box'>
@@ -126,7 +119,7 @@ function ListBox() {
       >
         {isOpen1 ? "–" : "+"}
       </button>
-      {isOpen1 && <MovieLists />}
+      {isOpen1 && children}
     </div>
   );
 }
@@ -217,20 +210,25 @@ function WatchedBox() {
   );
 }
 
-function Main() {
-  return (
-    <main className='main'>
-      <ListBox />
-      <WatchedBox />
-    </main>
-  );
+function Main({ children }) {
+  return <main className='main'>{children}</main>;
 }
 
 export default function App() {
+  const [movies, setMovies] = useState(tempMovieData);
   return (
     <>
-      <Navbar />
-      <Main />
+      <Navbar>
+        <Logo />
+        <Search />
+        <Results movies={movies} />
+      </Navbar>
+      <Main>
+        <ListBox>
+          <MovieLists movies={movies} />
+        </ListBox>
+        <WatchedBox />
+      </Main>
     </>
   );
 }
