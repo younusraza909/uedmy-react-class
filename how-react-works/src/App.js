@@ -31,7 +31,7 @@ function Tabbed({ content }) {
 
   return (
     <div>
-      <div className="tabs">
+      <div className='tabs'>
         <Tab num={0} activeTab={activeTab} onClick={setActiveTab} />
         <Tab num={1} activeTab={activeTab} onClick={setActiveTab} />
         <Tab num={2} activeTab={activeTab} onClick={setActiveTab} />
@@ -39,7 +39,10 @@ function Tabbed({ content }) {
       </div>
 
       {activeTab <= 2 ? (
-        <TabContent item={content.at(activeTab)} />
+        <TabContent
+          item={content.at(activeTab)}
+          key={content.at(activeTab).summary}
+        />
       ) : (
         <DifferentContent />
       )}
@@ -67,23 +70,23 @@ function TabContent({ item }) {
   }
 
   return (
-    <div className="tab-content">
+    <div className='tab-content'>
       <h4>{item.summary}</h4>
       {showDetails && <p>{item.details}</p>}
 
-      <div className="tab-actions">
+      <div className='tab-actions'>
         <button onClick={() => setShowDetails((h) => !h)}>
           {showDetails ? "Hide" : "Show"} details
         </button>
 
-        <div className="hearts-counter">
+        <div className='hearts-counter'>
           <span>{likes} ❤️</span>
           <button onClick={handleInc}>+</button>
           <button>+++</button>
         </div>
       </div>
 
-      <div className="tab-undo">
+      <div className='tab-undo'>
         <button>Undo</button>
         <button>Undo in 2s</button>
       </div>
@@ -93,7 +96,7 @@ function TabContent({ item }) {
 
 function DifferentContent() {
   return (
-    <div className="tab-content">
+    <div className='tab-content'>
       <h4>I'm a DIFFERENT tab, so I reset state 💣💥</h4>
     </div>
   );
