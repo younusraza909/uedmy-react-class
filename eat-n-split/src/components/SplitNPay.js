@@ -30,7 +30,7 @@ function SplitNPay() {
   }
 
   return (
-    <div className="container">
+    <div className='container'>
       <FriendList
         friendList={friendList}
         addFriend={handleAddFriend}
@@ -41,6 +41,7 @@ function SplitNPay() {
         <ExpenseCalculator
           selected={selectedfriend}
           onFormSubmit={adjustBill}
+          key={selectedfriend.id}
         />
       )}
     </div>
