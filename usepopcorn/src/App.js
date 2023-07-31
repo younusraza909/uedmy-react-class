@@ -226,6 +226,13 @@ export default function App() {
         setIsLoading(false);
       }
     };
+
+    if (!query.length) {
+      setMovies([]);
+      setError("");
+      return;
+    }
+
     fetchMovies();
   }, [query]);
 
