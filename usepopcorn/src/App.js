@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const tempMovieData = [
   {
@@ -188,9 +188,17 @@ function Main({ children }) {
   return <main className='main'>{children}</main>;
 }
 
+const KEY = "";
+
 export default function App() {
   const [movies, setMovies] = useState(tempMovieData);
   const [watched, setWatched] = useState(tempWatchedData);
+
+  useEffect(() => {
+    fetch(`http://www.omdbapi.com/?i=&apikey=${KEY}&s=interstellar`)
+      .then((res) => res.json())
+      .then((data) => console.log(data.Search));
+  }, []);
 
   return (
     <>
