@@ -18,7 +18,7 @@ export default function App() {
   const [movies, setMovies] = useState([]);
   const [watched, setWatched] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [query, setQuery] = useState("inception");
+  const [query, setQuery] = useState("");
   const [error, setError] = useState("");
   const [selectedId, setSelectedId] = useState(null);
 
@@ -58,6 +58,8 @@ export default function App() {
       setError("");
       return;
     }
+
+    handleCloseMovie();
 
     fetchMovies();
 
