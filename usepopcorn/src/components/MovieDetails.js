@@ -27,6 +27,18 @@ function MovieDetails({
     Genre: genre,
   } = movie;
 
+  // In order to achieve following we should use derived state
+
+  // const [isTop, setIsTop] = useState(imdbRating > 8); //this will always give false because in first render we dont have imdbRating and on second render this code will not run
+  // console.log(isTop);
+
+  // useEffect(() => {
+  //   setIsTop(imdbRating > 8);
+  // }, [imdbRating]);
+
+  // DERIVED STATE
+  // let isTop = imdbRating > 8;
+
   function handleAdd() {
     const newWatchedMovie = {
       imdbID: selectedId,
