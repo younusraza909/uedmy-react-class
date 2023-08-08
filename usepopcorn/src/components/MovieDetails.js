@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import StarRating from "../StarRating";
 import Loader from "./Loader";
+import { useKey } from "../hooks/useKey";
 
 const KEY = "70c948ec";
 
@@ -76,17 +77,8 @@ function MovieDetails({
     getMovieDetails();
   }, [selectedId]);
 
-  useEffect(() => {
-    function callBack(e) {
-      if (e.code === "Escape") {
-        onCloseMovie();
-      }
-    }
-
-    document.addEventListener("keydown", callBack);
-
-    return () => document.removeEventListener("keydown", callBack);
-  }, [onCloseMovie]);
+  // Calling a custom hook to add event litener
+  useKey("Escape", onCloseMovie);
 
   useEffect(() => {
     if (!title) return;

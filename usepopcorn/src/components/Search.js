@@ -1,24 +1,16 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
+import { useKey } from "../hooks/useKey";
 
 function Search({ query, setQuery }) {
   const inputElement = useRef(null);
 
-  useEffect(() => {
-    function callback(e) {
-      if (e.code === "Enter") {
-        // now we dont want this functionality if currently our input field is active
-        // to check it
-        if (document.activeElement === inputElement.current) return;
+  // Calling a custom hook to add event litener
+  useKey("Enter", () => {
+    if (document.activeElement === inputElement.current) return;
 
-        inputElement.current.focus();
-        setQuery("");
-      }
-    }
-
-    document.addEventListener("keydown", callback);
-
-    return () => document.removeEventListener("keydown", callback);
-  }, [setQuery]);
+    inputElement.current.focus();
+    setQuery("");
+  });
 
   return (
     <input
