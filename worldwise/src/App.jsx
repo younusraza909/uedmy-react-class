@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import CityList from "./components/CityList";
 import City from "./components/City";
 import CountryList from "./components/CountryList";
+import Form from "./components/Form";
 
 const BASE_URL = "http://localhost:8000";
 
@@ -50,7 +51,7 @@ function App() {
             path='countries'
             element={<CountryList isLoading={loading} cities={cities} />}
           />
-          <Route path='form' element={<p>Forms</p>} />
+          <Route path='form' element={<Form />} />
         </Route>
         <Route path='product' element={<Product />} />
         <Route path='pricing' element={<Pricing />} />
