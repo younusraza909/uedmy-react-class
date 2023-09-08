@@ -1,11 +1,14 @@
 /* eslint-disable react/prop-types */
-import Spinner from "./Spinner";
-import styles from "./CountryList.module.css";
-import CountryItem from "./CountryItem";
-import Message from "./Message";
+import Spinner from './Spinner';
+import styles from './CountryList.module.css';
+import CountryItem from './CountryItem';
+import Message from './Message';
+import { useCities } from '../CitiesContext';
 
-function CountryList({ cities, isLoading }) {
-  if (isLoading) return <Spinner />;
+function CountryList() {
+  const { cities, loading } = useCities();
+
+  if (loading) return <Spinner />;
 
   if (!cities.length)
     return (
