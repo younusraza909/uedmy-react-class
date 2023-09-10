@@ -35,6 +35,42 @@
         "lng": 13.376933665713324
       },
       "id": 98443197
+    },
+    {
+      "cityName": "Montchevrier",
+      "country": "France",
+      "emoji": "🇫🇷",
+      "date": "2023-09-06T06:45:57.000Z",
+      "notes": "France",
+      "position": {
+        "lat": "46.46813299215556",
+        "lng": "1.8017578125000002"
+      },
+      "id": 98443198
+    },
+    {
+      "cityName": "Lles de Cerdanya",
+      "country": "Spain",
+      "emoji": "🇪🇸",
+      "date": "2023-09-10T06:48:14.044Z",
+      "notes": "Lles de Cerdanya",
+      "position": {
+        "lat": "42.48830197960227",
+        "lng": "1.6699218750000002"
+      },
+      "id": 98443199
+    },
+    {
+      "cityName": "Karachi",
+      "country": "Pakistan",
+      "emoji": "🇵🇰",
+      "date": "2023-09-10T06:51:17.115Z",
+      "notes": "I live here",
+      "position": {
+        "lat": "25.05069102279458",
+        "lng": "67.06226348876955"
+      },
+      "id": 98443200
     }
   ]
 }

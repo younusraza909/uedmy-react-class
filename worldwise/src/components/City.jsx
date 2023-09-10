@@ -1,16 +1,16 @@
-import styles from './City.module.css';
-import ButtonBack from './BackButton';
-import { useCities } from '../CitiesContext';
-import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import Spinner from './Spinner';
+import styles from "./City.module.css";
+import ButtonBack from "./BackButton";
+import { useCities } from "../context/CitiesContext";
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import Spinner from "./Spinner";
 
 const formatDate = (date) =>
-  new Intl.DateTimeFormat('en', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
-    weekday: 'long',
+  new Intl.DateTimeFormat("en", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    weekday: "long",
   }).format(new Date(date));
 
 function City() {
@@ -50,8 +50,8 @@ function City() {
         <h6>Learn more</h6>
         <a
           href={`https://en.wikipedia.org/wiki/${cityName}`}
-          target='_blank'
-          rel='noreferrer'
+          target="_blank"
+          rel="noreferrer"
         >
           Check out {cityName} on Wikipedia &rarr;
         </a>

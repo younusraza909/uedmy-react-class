@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import styles from './Map.module.css';
+import styles from "./Map.module.css";
 
 import {
   MapContainer,
@@ -8,13 +8,13 @@ import {
   TileLayer,
   useMap,
   useMapEvents,
-} from 'react-leaflet';
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useCities } from '../CitiesContext';
-import { useGeolocation } from '../hooks/useGeolocation';
-import Button from './Button';
-import { useUrlPosition } from '../hooks/useUrlPosition';
+} from "react-leaflet";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useCities } from "../context/CitiesContext";
+import { useGeolocation } from "../hooks/useGeolocation";
+import Button from "./Button";
+import { useUrlPosition } from "../hooks/useUrlPosition";
 
 function Map() {
   const { cities } = useCities();
@@ -39,14 +39,14 @@ function Map() {
   return (
     <div className={styles.mapContainer}>
       {!geoLocationPosition && (
-        <Button type='position' onClick={getPosition}>
-          {isLoadingPosition ? 'Loading....' : 'Use Your Position'}
+        <Button type="position" onClick={getPosition}>
+          {isLoadingPosition ? "Loading...." : "Use Your Position"}
         </Button>
       )}
       <MapContainer className={styles.map} center={mapPosition} zoom={6}>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url='https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png'
+          url="https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
         />
         {cities.map((city) => (
           <Marker
