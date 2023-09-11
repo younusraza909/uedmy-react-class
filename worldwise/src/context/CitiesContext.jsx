@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from 'react';
 
-const BASE_URL = "http://localhost:8000";
+const BASE_URL = 'http://localhost:8000';
 
 const CitiesContext = createContext();
 
@@ -19,7 +19,7 @@ const CitiesProvider = ({ children }) => {
         setCities(data);
       } catch (error) {
         console.log(error);
-        alert("There was an error loading data");
+        alert('There was an error loading data');
       } finally {
         setLoading(false);
       }
@@ -35,7 +35,7 @@ const CitiesProvider = ({ children }) => {
       setCurrentCity(data);
     } catch (error) {
       console.log(error);
-      alert("There was an error loading data");
+      alert('There was an error loading data');
     } finally {
       setLoading(false);
     }
@@ -45,17 +45,32 @@ const CitiesProvider = ({ children }) => {
     try {
       setLoading(true);
       const res = await fetch(`${BASE_URL}/cities`, {
-        method: "POST",
+        method: 'POST',
         body: JSON.stringify(newCity),
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
       });
       const data = await res.json();
 
       setCities((cities) => [...cities, data]);
     } catch {
-      alert("Something went wrong while creating city");
+      alert('Something went wrong while creating city');
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function deleteCity(id) {
+    try {
+      setLoading(true);
+      await fetch(`${BASE_URL}/cities/${id}`, {
+        method: 'DELETE',
+      });
+
+      setCities((cities) => cities.filter((city) => city.id !== id));
+    } catch {
+      alert('Something went wrong while deleting city..');
     } finally {
       setLoading(false);
     }
@@ -69,6 +84,7 @@ const CitiesProvider = ({ children }) => {
         getCity,
         currentCity,
         createCity,
+        deleteCity,
       }}
     >
       {children}
@@ -80,7 +96,7 @@ const useCities = () => {
   const context = useContext(CitiesContext);
 
   if (context === undefined)
-    throw new Error("Context was used outside of provider!");
+    throw new Error('Context was used outside of provider!');
 
   return context;
 };
