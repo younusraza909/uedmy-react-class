@@ -1,6 +1,6 @@
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "../contexts/FakeAuthContext";
-import styles from "./User.module.css";
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/FakeAuthContext';
+import styles from './User.module.css';
 
 function User() {
   const { user, logout } = useAuth();
@@ -8,8 +8,10 @@ function User() {
 
   function handleClick() {
     logout();
-    navigate("/");
+    navigate('/');
   }
+
+  if (!user) return;
 
   return (
     <div className={styles.user}>
