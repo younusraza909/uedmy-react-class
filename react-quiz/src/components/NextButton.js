@@ -1,12 +1,9 @@
-function NextButton({ dispatch, answer, index, numQuestions }) {
+function NextButton({ nextQuestion, finishGame, answer, index, numQuestions }) {
   if (answer === null) return null;
 
   if (index < numQuestions - 1) {
     return (
-      <button
-        className='btn btn-ui'
-        onClick={() => dispatch({ type: "nextQuestion" })}
-      >
+      <button className='btn btn-ui' onClick={() => nextQuestion()}>
         Next
       </button>
     );
@@ -14,10 +11,7 @@ function NextButton({ dispatch, answer, index, numQuestions }) {
 
   if (index === numQuestions - 1) {
     return (
-      <button
-        className='btn btn-ui'
-        onClick={() => dispatch({ type: "finish" })}
-      >
+      <button className='btn btn-ui' onClick={() => finishGame()}>
         Finish
       </button>
     );

@@ -1,22 +1,22 @@
-import React from "react";
+import React from 'react';
 
-function Options({ question, dispatch, answer }) {
+function Options({ question, newAnswer, answer }) {
   let hasAnswerd = answer !== null;
   return (
     <div className='options'>
       {question.options.map((option, index) => (
         <button
-          className={`btn btn-option ${index === answer ? "answer" : ""} ${
+          className={`btn btn-option ${index === answer ? 'answer' : ''} ${
             hasAnswerd
               ? index === question.correctOption
-                ? "correct"
-                : "wrong"
-              : ""
+                ? 'correct'
+                : 'wrong'
+              : ''
           }`}
           key={option}
           disabled={hasAnswerd}
           onClick={() => {
-            dispatch({ type: "newAnswer", payload: index });
+            newAnswer(index);
           }}
         >
           {option}

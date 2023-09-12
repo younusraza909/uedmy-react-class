@@ -1,11 +1,11 @@
-import Options from "../components/Options";
+import Options from '../components/Options';
 
-function Question({ question, dispatch, answer }) {
+function Question({ question, newAnswer, answer }) {
   console.log(question);
   return (
     <div>
       <h4>{question.question}</h4>
-      <Options question={question} dispatch={dispatch} answer={answer} />
+      <Options question={question} newAnswer={newAnswer} answer={answer} />
     </div>
   );
 }
