@@ -1,7 +1,10 @@
 import Options from '../components/Options';
+import { useQuiz } from '../context/QuizContext';
 
-function Question({ question, newAnswer, answer }) {
-  console.log(question);
+function Question() {
+  const { questions, index, answer, newAnswer } = useQuiz();
+
+  let question = questions[index];
   return (
     <div>
       <h4>{question.question}</h4>
