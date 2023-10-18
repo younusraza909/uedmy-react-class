@@ -1,5 +1,5 @@
-import { createContext, useContext, useState } from 'react';
-import { faker } from '@faker-js/faker';
+import { createContext, useContext, useMemo, useState } from "react";
+import { faker } from "@faker-js/faker";
 
 // 1) Create a new context
 const PostContext = createContext();
@@ -15,7 +15,7 @@ function PostProvider({ children }) {
   const [posts, setPosts] = useState(() =>
     Array.from({ length: 30 }, () => createRandomPost())
   );
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
 
   // Derived state. These are the posts that will actually be displayed
   const searchedPosts =
@@ -35,26 +35,24 @@ function PostProvider({ children }) {
     setPosts([]);
   }
 
-  return (
-    <PostContext.Provider
-      value={{
-        posts: searchedPosts,
-        onClearPosts: handleClearPosts,
-        onAddPost: handleAddPost,
-        searchQuery,
-        setSearchQuery,
-      }}
-    >
-      {children}
-    </PostContext.Provider>
-  );
+  const value = useMemo(() => {
+    return {
+      posts: searchedPosts,
+      onClearPosts: handleClearPosts,
+      onAddPost: handleAddPost,
+      searchQuery,
+      setSearchQuery,
+    };
+  }, [searchedPosts, searchQuery]);
+
+  return <PostContext.Provider value={value}>{children}</PostContext.Provider>;
 }
 
 function usePosts() {
   const context = useContext(PostContext);
 
   if (context === undefined)
-    throw new Error('Context was used outside of provider!');
+    throw new Error("Context was used outside of provider!");
 
   return context;
 }
