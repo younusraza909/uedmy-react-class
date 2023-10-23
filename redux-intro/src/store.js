@@ -55,12 +55,12 @@ function customerReducer(state = initialStateCustomer, action) {
   }
 }
 
-const rootReducer = (combineReducers = {
+const rootReducer = combineReducers({
   account: accountReducer,
   customer: customerReducer,
 });
 
-const store = createStore(accountReducer);
+const store = createStore(rootReducer);
 
 function deposit(amount) {
   return { type: "account/deposit", payload: amount };
