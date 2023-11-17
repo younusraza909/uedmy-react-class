@@ -7,8 +7,6 @@ function Menu() {
   // React router knows that by using this hook we want data fetched by loader into this component
   const menu = useLoaderData();
 
-  console.log("Menu 2", menu);
-
   return (
     <ul>
       {menu.map((pizza) => (
@@ -22,7 +20,6 @@ function Menu() {
 export async function loader() {
   const menu = await getMenu();
 
-  console.log("Menu", menu);
   return menu;
 }
 

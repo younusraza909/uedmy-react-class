@@ -5,7 +5,7 @@ import Error from "./ui/Error";
 import Menu, { loader as menuLoader } from "./features/menu/Menu";
 import Cart from "./features/cart/Cart";
 import CreateOrder from "./features/order/CreateOrder";
-import Order from "./features/order/Order";
+import Order, { loader as orderLoader } from "./features/order/Order";
 import AppLayout from "./ui/AppLayout";
 
 // in react-router@6 implementation is changed now you can fetch data and render
@@ -33,7 +33,13 @@ const router = createBrowserRouter([
       },
       { path: "/cart", element: <Cart /> },
       { path: "/cart/new", element: <CreateOrder /> },
-      { path: "/order/:orderId", element: <Order /> },
+      {
+        path: "/order/:orderId",
+        element: <Order />,
+        // if we don't pass params still orderLoader function will have access to this params
+        loader: ({ params }) => orderLoader(params.orderId),
+        errorElement: <Error />,
+      },
     ],
   },
 ]);
