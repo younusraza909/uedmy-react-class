@@ -1,6 +1,7 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import Home from "./ui/Home";
+import Error from "./ui/Error";
 import Menu, { loader as menuLoader } from "./features/menu/Menu";
 import Cart from "./features/cart/Cart";
 import CreateOrder from "./features/order/CreateOrder";
@@ -14,6 +15,11 @@ import AppLayout from "./ui/AppLayout";
 const router = createBrowserRouter([
   {
     element: <AppLayout />,
+    // This will work as wild card
+    // If any error happens while loading or invalida route
+    // Following page will be shown
+    // now in order to show it error will bubble up so it will show error screen with out app layout
+    errorElement: <Error />,
     children: [
       {
         path: "/",
@@ -23,6 +29,7 @@ const router = createBrowserRouter([
         path: "/menu",
         element: <Menu />,
         loader: menuLoader,
+        errorElement: <Error />,
       },
       { path: "/cart", element: <Cart /> },
       { path: "/cart/new", element: <CreateOrder /> },
