@@ -44,6 +44,9 @@ export default cartSlice.reducer;
 
 // adding selector like this is recommended but it get computed every time we call it
 // we can use reselect library for big apps
+
+export const getCart = (state) => state.cart.cart;
+
 export const getTotalCartQuantity = (state) =>
   state.cart.cart.reduce((sum, item) => sum + item.quantity, 0);
 
