@@ -1,16 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  // cart:[]
-  cart: [
-    {
-      pizzaId: 12,
-      name: "Mediterranean",
-      quantity: 2,
-      unitPrice: 16,
-      totalPrice: 32,
-    },
-  ],
+  cart: [],
 };
 
 const cartSlice = createSlice({
@@ -18,7 +9,7 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addItem(state, action) {
-      state.cart.push = action.payload;
+      state.cart.push(action.payload);
     },
     deleteItem(state, action) {
       state.cart = state.cart.filter((cart) => cart.pizzaId !== action.payload);
@@ -50,3 +41,11 @@ export const {
 } = cartSlice.actions;
 
 export default cartSlice.reducer;
+
+// adding selector like this is recommended but it get computed every time we call it
+// we can use reselect library for big apps
+export const getTotalCartQuantity = (state) =>
+  state.cart.cart.reduce((sum, item) => sum + item.quantity, 0);
+
+export const getTotalCartPrice = (state) =>
+  state.cart.cart.reduce((sum, item) => sum + item.unitPrice, 0);
