@@ -22,7 +22,13 @@ export async function deleteCabins(id) {
   return data;
 }
 
-export async function createCabin(newCabin) {
+// make this function so that it can be used for create and edit function
+export async function createEditCabin(newCabin, cabinToEditId) {
+  //checking weather image was changed while updating or not
+
+
+  const isImageChanged = newCabin.image?.startsWith?.(supabaseUrl);
+
   // if in image name we have slashes(/) then supabase will creat nested folder
   // so we are replacing it
 
@@ -31,22 +37,34 @@ export async function createCabin(newCabin) {
     "/",
     ""
   );
+  const imagePath = isImageChanged
+    ? newCabin.image
+    : `${supabaseUrl}/storage/v1/object/public/cabin-images/${imageName}`;
 
-  const imagePath = `${supabaseUrl}/storage/v1/object/public/${bucketName}/${imageName}`;
 
-  // Create Cabin
-  const { data, error } = await supabase
+  // General Query
+  let query = await supabase
     .from("cabins")
-    .insert([{ ...newCabin, image: imagePath }])
-    .select();
+
+  // Create/Edit Cabin
+  query = !cabinToEditId ? query.insert([{ ...newCabin, image: imagePath }]) : query.update({ ...newCabin, image: imagePath })
+    .eq('id', cabinToEditId)
+
+
+
+  const { data, error } = await query
+    .select()
+    .single()
+
 
   if (error) {
     console.error(error);
     throw new Error("Cabins could not be created");
   }
 
-  // Upload Image
+  if (isImageChanged) return data
 
+  // Upload Image
   const { storageError } = await supabase.storage
     .from(bucketName)
     .upload(imageName, newCabin.image);
@@ -59,6 +77,7 @@ export async function createCabin(newCabin) {
       "Cabin image could not be uploaded, cabin was not created."
     );
   }
+
 
   return data;
 }
