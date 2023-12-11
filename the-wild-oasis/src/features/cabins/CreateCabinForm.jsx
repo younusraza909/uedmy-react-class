@@ -110,7 +110,11 @@ function CreateCabinForm() {
         />
       </FormRow>
 
-      <FormRow label="Cabin photo">
+      <FormRow
+        label="Cabin photo"
+        disabled={isCreating}
+        error={errors?.image?.message}
+      >
         <FileInput
           id="image"
           accept="image/*"
