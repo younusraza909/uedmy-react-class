@@ -63,7 +63,7 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
     // the react form hoook will call onSubmit if any error found than it will call onError function
     <Form
       onSubmit={handleSubmit(onSubmit, onError)}
-      type={onCloseModal && "modal"}
+      type={onCloseModal ? "modal" : "regular"}
     >
       <FormRow label="Cabin name" error={errors?.name?.message}>
         <Input

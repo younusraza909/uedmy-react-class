@@ -2,9 +2,6 @@ import styled from "styled-components";
 
 import { HiXMark } from "react-icons/hi2";
 import { createPortal } from "react-dom";
-import { createContext, useState } from "react";
-import { useContext } from "react";
-import { cloneElement } from "react";
 
 const StyledModal = styled.div`
   position: fixed;
@@ -55,46 +52,20 @@ const Button = styled.button`
   }
 `;
 
-const ModalContext = createContext();
-function Modal({ children }) {
-  const [openModal, setOpenModal] = useState("");
-
-  const onClose = () => setOpenModal("");
-  const onOpen = setOpenModal;
-
-  return (
-    <ModalContext.Provider value={{ openModal, onClose, onOpen }}>
-      {children}
-    </ModalContext.Provider>
-  );
-}
-
-function Open({ children, opens }) {
-  const { onOpen } = useContext(ModalContext);
-
-  return cloneElement(children, { onClick: () => onOpen(opens) });
-}
-
-function Window({ children, opens }) {
-  const { openModal, onClose } = useContext(ModalContext);
-
-  if (openModal !== opens) return null;
+function Modal({ children, onCloseModal }) {
   // Everything is working fine but sometime if we use this modal in a place where parent component
   //  has a css property set to overflow then this modal will be cutt of in order to prevent that we use REACT-PORTAL
   return createPortal(
     <Overlay>
       <StyledModal>
-        <Button onClick={() => onClose()}>
+        <Button onClick={() => onCloseModal()}>
           <HiXMark />
         </Button>
-        {cloneElement(children, { onCloseModal: () => onClose })}
+        {children}
       </StyledModal>
     </Overlay>,
     document.body
   );
 }
-
-Modal.Window = Window;
-Modal.Open = Open;
 
 export default Modal;
