@@ -1,5 +1,8 @@
 import styled from "styled-components";
 
+import { HiXMark } from "react-icons/hi2";
+import { createPortal } from "react-dom";
+
 const StyledModal = styled.div`
   position: fixed;
   top: 50%;
@@ -48,3 +51,21 @@ const Button = styled.button`
     color: var(--color-grey-500);
   }
 `;
+
+function Modal({ children, onCloseModal }) {
+  // Everything is working fine but sometime if we use this modal in a place where parent component
+  //  has a css property set to overflow then this modal will be cutt of in order to prevent that we use REACT-PORTAL
+  return createPortal(
+    <Overlay>
+      <StyledModal>
+        <Button onClick={() => onCloseModal()}>
+          <HiXMark />
+        </Button>
+        {children}
+      </StyledModal>
+    </Overlay>,
+    document.body
+  );
+}
+
+export default Modal;

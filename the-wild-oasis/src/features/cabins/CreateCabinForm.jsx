@@ -9,7 +9,7 @@ import { useForm } from "react-hook-form";
 import useCreateCabin from "./useCreateCabin";
 import useEditCabin from "./useEditCabin";
 
-function CreateCabinForm({ cabinToEdit = {} }) {
+function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
   const { id: cabinToEditId, ...cabinToEditValue } = cabinToEdit;
 
   const isEditForm = Boolean(cabinToEditId);
@@ -35,11 +35,21 @@ function CreateCabinForm({ cabinToEdit = {} }) {
             },
             id: cabinToEditId,
           },
-          { onSuccess: () => reset() }
+          {
+            onSuccess: () => {
+              reset();
+              onCloseModal?.();
+            },
+          }
         )
       : createCabin(
           { ...data, image: data.image[0] },
-          { onSuccess: () => reset() }
+          {
+            onSuccess: () => {
+              reset();
+              onCloseModal?.();
+            },
+          }
         );
   }
 
@@ -51,7 +61,10 @@ function CreateCabinForm({ cabinToEdit = {} }) {
 
   return (
     // the react form hoook will call onSubmit if any error found than it will call onError function
-    <Form onSubmit={handleSubmit(onSubmit, onError)}>
+    <Form
+      onSubmit={handleSubmit(onSubmit, onError)}
+      type={onCloseModal && "modal"}
+    >
       <FormRow label="Cabin name" error={errors?.name?.message}>
         <Input
           type="text"
