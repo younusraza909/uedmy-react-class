@@ -85,9 +85,9 @@ function Row({ children }) {
   );
 }
 
-function Body({ render, cabins }) {
-  if (cabins.length === 0) return <Empty />;
-  return <StyledBody>{cabins.map(render)}</StyledBody>;
+function Body({ render, data }) {
+  if (data.length === 0) return <Empty />;
+  return <StyledBody>{data.map(render)}</StyledBody>;
 }
 
 function Footer() {
