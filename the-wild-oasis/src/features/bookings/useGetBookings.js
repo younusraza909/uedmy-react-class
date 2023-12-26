@@ -20,16 +20,19 @@ export default function useGetBookings() {
 
   const sort = { field, direction };
 
+  // PAGINATION
+  const page = !searchParams.get("page") ? 1 : searchParams.get("page");
+
   const {
     isLoading,
-    data: bookings,
+    data: { data: bookings, count } = {},
     // error,
   } = useQuery({
     // this array worked a lot similar to use Effect dependencies
-    queryKey: ["bookings", filter, sort],
+    queryKey: ["bookings", filter, sort, page],
     // here function should return promise
-    queryFn: () => getBookings({ filter, sort }),
+    queryFn: () => getBookings({ filter, sort, page }),
   });
 
-  return { bookings, isLoading };
+  return { bookings, isLoading, count };
 }
