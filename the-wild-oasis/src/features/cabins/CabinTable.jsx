@@ -29,9 +29,6 @@ function CabinTable() {
   const sortedCabins = filteredCabins.sort(
     (a, b) => (a[field] - b[field]) * modifier
   );
-
-  console.log("sortedCabins", sortedCabins);
-
   return (
     <Menus>
       <Table columns="0.6fr 1.8fr 2.2fr 1fr 1fr 1fr">
@@ -47,8 +44,6 @@ function CabinTable() {
           data={sortedCabins}
           render={(cabin) => <CabinRow key={cabin.id} cabin={cabin} />}
         />
-
-        <Table.Footer />
       </Table>
     </Menus>
   );

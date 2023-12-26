@@ -90,8 +90,8 @@ function Body({ render, data }) {
   return <StyledBody>{data.map(render)}</StyledBody>;
 }
 
-function Footer() {
-  return <StyledFooter />;
+function Footer({ children }) {
+  return <StyledFooter>{children}</StyledFooter>;
 }
 
 Table.Header = Header;
