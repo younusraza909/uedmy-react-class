@@ -9,7 +9,7 @@ export default function useGetBooking() {
     data: booking,
     // error,
   } = useQuery({
-    queryKey: ["booking"],
+    queryKey: ["booking", bookingId],
     // here function should return promise
     queryFn: () => getBooking(bookingId),
   });
