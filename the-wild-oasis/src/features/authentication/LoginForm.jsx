@@ -5,10 +5,12 @@ import Input from "../../ui/Input";
 import FormRowVertical from "../../ui/FormRowVertical";
 import useLogin from "./useLogin";
 import SpinnerMini from "../../ui/SpinnerMini";
+import { useNavigate } from "react-router-dom";
 
 function LoginForm() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("younus@example.com");
+  const [password, setPassword] = useState("Test@123");
+  const navigate = useNavigate();
 
   const { login, isLoading } = useLogin();
 
@@ -16,7 +18,16 @@ function LoginForm() {
     e.preventDefault();
 
     if (!email || !password) return;
-    login({ email, password });
+    login(
+      { email, password },
+      { onSuccess: () => navigate("/dashboard") },
+      {
+        onSettled: () => {
+          // setPassword("");
+          // setEmail("");
+        },
+      }
+    );
   }
 
   return (
