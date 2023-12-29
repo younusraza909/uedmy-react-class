@@ -32,6 +32,7 @@ function UserAvatar() {
         scr={avatar || 'default-user.jpg'}
         alt={`Profile picture for ${fullName}`}
       />
+      <span>{fullName}</span>
     </StyledUserAvatar>
   );
 }
