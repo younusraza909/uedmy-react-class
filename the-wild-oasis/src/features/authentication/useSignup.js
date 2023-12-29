@@ -4,7 +4,7 @@ import { signup as signupApi } from "../../services/apiAuthentication";
 
 export default function useSignup() {
     const { mutate: signup, isLoading } = useMutation({
-        mutationFn: ({ email, password, fullName }) => signupApi({ email, password, fullName }),
+        mutationFn: signupApi,
         onSuccess: () => {
             toast.success("User created successfully, to verify please check email of recent created user");
         },
