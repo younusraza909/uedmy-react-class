@@ -1,10 +1,10 @@
-import { useState } from "react";
-import { useContext } from "react";
-import { createContext } from "react";
-import styled from "styled-components";
-import { IoEllipsisVertical } from "react-icons/io5";
-import { createPortal } from "react-dom";
-import useOutsideClick from "../hooks/useOutsideClick";
+import { useState } from 'react';
+import { useContext } from 'react';
+import { createContext } from 'react';
+import styled from 'styled-components';
+import { IoEllipsisVertical } from 'react-icons/io5';
+import { createPortal } from 'react-dom';
+import useOutsideClick from '../hooks/useOutsideClick';
 
 const StyledMenu = styled.div`
   display: flex;
@@ -70,11 +70,11 @@ const StyledButton = styled.button`
 const MenuContext = createContext();
 
 function Menus({ children }) {
-  const [isOpenId, setIsOpenId] = useState("");
+  const [isOpenId, setIsOpenId] = useState('');
   const [position, setPosition] = useState({});
 
   const handleOpen = setIsOpenId;
-  const handleClose = () => setIsOpenId("");
+  const handleClose = () => setIsOpenId('');
 
   return (
     <MenuContext.Provider
@@ -87,7 +87,7 @@ function Menus({ children }) {
 
 function List({ id, children }) {
   const { isOpenId, position, handleClose } = useContext(MenuContext);
-  const ref = useOutsideClick(handleClose);
+  const ref = useOutsideClick(handleClose, false);
 
   if (id !== isOpenId) return null;
 
@@ -121,11 +121,12 @@ function Toggle({ id }) {
     useContext(MenuContext);
 
   function handler(e) {
-    isOpenId === "" || isOpenId !== id ? handleOpen(id) : handleClose();
+    e.stopPropagation();
+    isOpenId === '' || isOpenId !== id ? handleOpen(id) : handleClose();
 
     // calculating positioning of click
     // click would happen on scg so we are making sure to get closet button
-    const rect = e.target.closest("button").getBoundingClientRect();
+    const rect = e.target.closest('button').getBoundingClientRect();
     setPosition({
       x: window.innerWidth - rect.x - rect.width,
       y: rect.y + rect.height + 6,
